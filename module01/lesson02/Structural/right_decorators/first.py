@@ -21,17 +21,17 @@ def timelogger(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         start = time.time()
-        result = func(*args, **kwargs)
+        outcome = func(*args, **kwargs)
         end = time.time()
         print(f"{func.__name__}: {end - start}")
-        return result
+        return outcome
 
     return wrapper
 
 
 # @wrong_timelogger
 @timelogger
-def long_loop(num: int) -> None:
+def long_loop(num: int) -> str:
     """
     Long loop function
 
@@ -41,10 +41,13 @@ def long_loop(num: int) -> None:
 
     while num > 0:
         num -= 1
+    return "done"
 
 
 if __name__ == "__main__":
-    long_loop(100000)
-    print(f"Function name: {long_loop.__name__}")
-    print(f"Docstring function: {long_loop.__doc__}")
-    print(f"Annotation function: {long_loop.__annotations__}")
+    # long_loop(10000000)
+    # print(f"Function name: {long_loop.__name__}")
+    # print(f"Docstring function: {long_loop.__doc__}")
+    # print(f"Annotation function: {long_loop.__annotations__}")
+
+

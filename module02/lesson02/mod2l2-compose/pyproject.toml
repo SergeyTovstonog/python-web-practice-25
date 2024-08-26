@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python-web-practice"
+name = "mod2l2-compose"
 version = "0.1.0"
 description = ""
 authors = ["Sergey Tovstonog <s.tovstonog@gmail.com>"]
@@ -7,15 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-requests = "^2.31.0"
-black = "^24.8.0"
-flake8 = "^7.1.1"
-pylint = "^3.2.6"
-autoflake = "^2.3.1"
+flask = "^3.0.3"
+flask-sqlalchemy = "^3.1.1"
+psycopg2-binary = "^2.9.9"
 
-
-[tool.poetry.group.dev.dependencies]
-setuptools = "^69.5.1"
 
 [build-system]
 requires = ["poetry-core"]

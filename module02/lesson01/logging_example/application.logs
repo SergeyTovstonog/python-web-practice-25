@@ -1,0 +1,36 @@
+2024-08-20 17:56:42,334 [ERROR] - __main__ - get_logger(21) - Error
+2024-08-20 17:56:42,335 [ERROR] - __main__ - get_logger(22) - Error
+2024-08-20 17:56:42,335 [ERROR] - __main__ - get_logger(23) - Error
+2024-08-20 17:56:42,335 [ERROR] - __main__ - foo(13) - Ups i did it again
+2024-08-20 17:57:00,761 [ERROR] - ex02 - get_logger(21) - Error
+2024-08-20 17:57:00,761 [ERROR] - ex02 - get_logger(22) - Error
+2024-08-20 17:57:00,762 [ERROR] - ex02 - get_logger(23) - Error
+2024-08-20 17:57:00,762 [ERROR] - ex02 - foo(13) - Ups i did it again
+2024-08-20 17:58:35,247 [ERROR] - __main__ - get_logger(21) - Error
+2024-08-20 17:58:35,247 [ERROR] - __main__ - get_logger(22) - Error
+2024-08-20 17:58:35,247 [ERROR] - __main__ - get_logger(23) - Error
+2024-08-20 17:58:35,247 [ERROR] - __main__ - foo(13) - Ups i did it again
+2024-08-20 21:05:23,791 [ERROR] - __main__ - get_logger(21) - Error
+2024-08-20 21:05:23,793 [ERROR] - __main__ - get_logger(22) - Error
+2024-08-20 21:05:23,793 [ERROR] - __main__ - get_logger(23) - Error
+2024-08-20 21:05:23,793 [ERROR] - __main__ - foo(13) - Ups i did it again
+2024-08-20 21:09:45,483 [ERROR] - __main__ - get_logger(21) - Error
+2024-08-20 21:09:45,483 [ERROR] - __main__ - get_logger(22) - Error
+2024-08-20 21:09:45,484 [ERROR] - __main__ - get_logger(23) - Error
+2024-08-20 21:09:45,484 [ERROR] - __main__ - foo(13) - Ups i did it again
+2024-08-20 21:14:28,508 [ERROR] - ex02 - get_logger(21) - Error
+2024-08-20 21:14:28,509 [ERROR] - ex02 - get_logger(22) - Error
+2024-08-20 21:14:28,509 [ERROR] - ex02 - get_logger(23) - Error
+2024-08-20 21:14:28,509 [ERROR] - ex02 - foo(13) - Ups i did it again
+2024-08-20 21:14:58,025 [ERROR] - __main__ - get_logger(21) - Error
+2024-08-20 21:14:58,025 [ERROR] - __main__ - get_logger(22) - Error
+2024-08-20 21:14:58,025 [ERROR] - __main__ - get_logger(23) - Error
+2024-08-20 21:14:58,026 [ERROR] - __main__ - foo(13) - Ups i did it again
+2024-08-20 21:23:39,111 [ERROR] - __main__ - get_logger(21) - Error
+2024-08-20 21:23:39,112 [ERROR] - __main__ - get_logger(22) - Error
+2024-08-20 21:23:39,112 [ERROR] - __main__ - get_logger(23) - Error
+2024-08-20 21:24:40,056 [ERROR] - __main__ - foo(13) - Ups i did it again
+2024-08-20 21:26:28,420 [ERROR] - ex02 - get_logger(21) - Error
+2024-08-20 21:26:28,420 [ERROR] - ex02 - get_logger(22) - Error
+2024-08-20 21:26:28,420 [ERROR] - ex02 - get_logger(23) - Error
+2024-08-20 21:28:21,829 [ERROR] - ex02 - foo(15) - Ups i did it again

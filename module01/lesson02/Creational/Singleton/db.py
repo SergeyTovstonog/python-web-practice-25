@@ -24,6 +24,6 @@ class MSSQL(Connection):
 if __name__ == '__main__':
 
     db1 = MySQL()
-    db2 = MSSQL()
+    db2 = MySQL()
 
     print(db2 is db1)

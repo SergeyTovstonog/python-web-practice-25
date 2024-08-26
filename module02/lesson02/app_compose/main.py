@@ -6,7 +6,7 @@ client = MongoClient("mongodb://db:27017/")
 db = client.web7
 
 
-@app.route('/')
+@app.route("/")
 def index():
     result = {}
     cursor = db.users.find()
@@ -16,5 +16,5 @@ def index():
     return result
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")

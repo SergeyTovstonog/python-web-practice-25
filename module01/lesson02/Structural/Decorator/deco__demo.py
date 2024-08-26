@@ -1,6 +1,4 @@
 from functools import wraps
-from collections
-from itertools
 
 
 def greeting(func):
@@ -12,7 +10,7 @@ def greeting(func):
         return result
     return wrapper
 
-@greeting("Hi")
+@greeting
 def person(name: str):
     """
     Print person's name

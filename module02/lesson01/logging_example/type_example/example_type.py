@@ -1,4 +1,4 @@
-from typing import List, Union, TypeVar, Any
+from typing import List, TypeVar
 
 Number = int | float  # Union[float, int]  #
 T = TypeVar("T", int, str, float, list)

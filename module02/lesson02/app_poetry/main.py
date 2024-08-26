@@ -3,7 +3,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def hello():
     return """
         <h1>Hello World!</h1>
@@ -11,5 +11,5 @@ def hello():
         """
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
