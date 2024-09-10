@@ -26,6 +26,7 @@ if __name__ == '__main__':
     snd1.send(100)
     sleep(2)
     snd2.send(5)
+    snd2.send(25)
 
 
 

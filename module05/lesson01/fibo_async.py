@@ -1,8 +1,9 @@
 import time
 import threading
 import multiprocessing
+import asyncio
 
-# Function to calculate Fibonacci sequence
+# Function to calculate Fibonacci sequence (recursive, CPU-bound)
 def fibonacci(n):
     if n <= 1:
         return n
@@ -49,14 +50,34 @@ def multiprocessing_fibonacci(numbers):
     end_time = time.time()
     print("Multiprocessing execution time:", end_time - start_time)
 
+# Asynchronous Fibonacci function
+async def async_fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        # Awaiting the result of recursive calls (simulating async)
+        return await async_fibonacci(n-1) + await async_fibonacci(n-2)
+
+# Asynchronous approach
+async def async_fibonacci_runner(numbers):
+    start_time = time.time()
+    tasks = [async_fibonacci(number) for number in numbers]
+    fib_results = await asyncio.gather(*tasks)
+    end_time = time.time()
+    print("Asynchronous execution time:", end_time - start_time)
+    return fib_results
+
 if __name__ == "__main__":
-    numbers = [35] * 50  # Calculate Fibonacci(35) for 10 times
-    print(numbers)
+    numbers = [35] * 10  # Calculate Fibonacci(35) for 10 times
+
     # Sequential execution
     sequential_fibonacci(numbers)
-    #
+
     # Multithreading execution
     multithreading_fibonacci(numbers)
-    #
-    # # Multiprocessing execution
+
+    # Multiprocessing execution
     multiprocessing_fibonacci(numbers)
+
+    # Asynchronous execution
+    asyncio.run(async_fibonacci_runner(numbers))
