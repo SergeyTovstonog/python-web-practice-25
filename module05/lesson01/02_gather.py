@@ -20,7 +20,7 @@ async def main():
     r = await asyncio.gather(
         get_user_async(1),
         get_user_async(2),
-        get_user_async(3)
+        get_user_async(3),
     )
     return r
 

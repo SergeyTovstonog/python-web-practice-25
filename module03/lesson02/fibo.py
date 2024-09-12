@@ -50,7 +50,7 @@ def multiprocessing_fibonacci(numbers):
     print("Multiprocessing execution time:", end_time - start_time)
 
 if __name__ == "__main__":
-    numbers = [35] * 50  # Calculate Fibonacci(35) for 10 times
+    numbers = [35] * 10  # Calculate Fibonacci(35) for 10 times
     print(numbers)
     # Sequential execution
     sequential_fibonacci(numbers)

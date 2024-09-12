@@ -9,7 +9,7 @@ import asyncio
 async def request(url: str):
     async with aiohttp.ClientSession() as session:
         try:
-            async with session.get(url) as resp:
+            async with session.get(url, ssl=False) as resp:
                 if resp.status == 200:
                     r = await resp.json()
                     return r

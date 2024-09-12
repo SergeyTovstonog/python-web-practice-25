@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat with JSON Protocol and Commands</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #chatbox {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background: white;
+            width: 400px;
+            height: 500px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            z-index: 10; /* Make sure chatbox is above animations */
+        }
+        #messages {
+            flex-grow: 1;
+            padding-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message.my-message {
+            color: blue;
+        }
+        #messageInput {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        /* Style for special effects like !happy command */
+        .special-happy {
+            background-color: #ffeb3b;
+            color: #d32f2f;
+            text-align: center;
+            font-size: 1.5em;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            position: relative;
+            z-index: 10; /* Ensure the message is above animations */
+        }
+
+        /* Flying hearts effect */
+        .heart {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: red;
+            transform: rotate(-45deg);
+            animation: fly 4s ease-in infinite;
+        }
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -12px;
+            left: 0;
+        }
+        .heart::after {
+            left: 12px;
+            top: 0;
+        }
+
+        /* Flying animation */
+        @keyframes fly {
+            0% {
+                bottom: -10px;
+                left: 50%;
+                opacity: 1;
+            }
+            50% {
+                left: calc(50% + 100px);
+                opacity: 0.8;
+            }
+            100% {
+                bottom: 100%;
+                left: calc(50% - 100px);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti effect */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f44336;
+            animation: confetti 2s ease-in-out infinite;
+        }
+        @keyframes confetti {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message..." disabled>
+    </div>
+
+    <!-- Containers for flying hearts and confetti -->
+    <div id="heartContainer"></div>
+    <div id="confettiContainer"></div>
+
+    <script>
+        let ws;
+        const messages = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+        const heartContainer = document.getElementById('heartContainer');
+        const confettiContainer = document.getElementById('confettiContainer');
+
+        function connect(username) {
+            ws = new WebSocket(`ws://2.tcp.ngrok.io:10661/ws/chat/${username}`);
+
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+
+                // Check if it's a special effect
+                if (data.special_effect === 'happy') {
+                    messageElement.classList.add('special-happy');
+                    messageElement.textContent = data.message;
+                    triggerFlyingHearts();
+                    triggerConfetti();
+                } else {
+                    if (data.from === username) {
+                        messageElement.classList.add('my-message');
+                    }
+                    messageElement.textContent = `[${data.send_time}] ${data.from}: ${data.message}`;
+                }
+
+                messages.appendChild(messageElement);
+                messages.scrollTop = messages.scrollHeight;
+            };
+
+            ws.onopen = function() {
+                messageInput.disabled = false;
+                messageInput.focus();
+            };
+        }
+
+        function triggerFlyingHearts() {
+            heartContainer.innerHTML = ''; // Clear existing hearts
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`; // Random duration for each heart
+                heartContainer.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000); // Remove heart after the animation
+            }
+        }
+
+        function triggerConfetti() {
+            confettiContainer.innerHTML = ''; // Clear existing confetti
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.top = `${Math.random() * 100}%`;
+                confettiContainer.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 2000); // Remove confetti after the animation
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = prompt("Please enter your name");
+            if (username) {
+                connect(username);
+            }
+        });
+
+        messageInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter' && messageInput.value) {
+                const message = {
+                    message: messageInput.value,
+                };
+                ws.send(JSON.stringify(message));
+                messageInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>

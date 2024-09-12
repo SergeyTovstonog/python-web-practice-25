@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #chatbox {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background: white;
+            width: 400px;
+            height: 500px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        #messages {
+            flex-grow: 1;
+            padding-bottom: 20px;
+        }
+        #messageInput {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message..." autofocus>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8000/ws/chat');
+        const messages = document.getElementById('messages');
+        const input = document.getElementById('messageInput');
+
+        ws.onmessage = function(event) {
+            const message = document.createElement('div');
+            message.textContent = event.data;
+            messages.appendChild(message);
+            messages.scrollTop = messages.scrollHeight;
+        };
+
+        input.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                ws.send(input.value);
+                input.value = '';
+            }
+        });
+    </script>
+</body>
+</html>

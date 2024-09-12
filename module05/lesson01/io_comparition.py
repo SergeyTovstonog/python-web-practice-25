@@ -28,7 +28,7 @@ def sequential_execution(tasks):
 # ThreadPoolExecutor execution
 def thread_pool_execution(tasks):
     print("\nThread pool execution:")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         results = [executor.submit(task, n) for n in tasks]
         return [future.result() for future in concurrent.futures.as_completed(results)]
 
@@ -40,7 +40,7 @@ async def asyncio_execution(tasks):
 
 # Main function to compare the methods
 def main():
-    tasks = [1, 2, 3, 4, 5]
+    tasks = [n for n in range(10)]
 
     # Sequential execution
     start_time = time.time()
