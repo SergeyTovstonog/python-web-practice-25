@@ -3,12 +3,12 @@ import logging
 from faker import Faker
 from psycopg2 import DatabaseError
 
-from lesson02.connection import create_connection
+from connection import create_connection
 
 fake = Faker()
 
 if __name__ == '__main__':
-    sql_expression = "UPDATE users SET phone = %s WHERE id = %s"
+    sql_expression = "UPDATE users_new SET phone = %s WHERE id = %s"
 
     try:
         with create_connection() as conn:

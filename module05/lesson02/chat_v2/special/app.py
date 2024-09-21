@@ -9,7 +9,7 @@ class ChatMessage(NamedTuple):
     from_user: str
     message: str
     send_time: str
-    special_effect: Optional[str] = None  # Optional field for special effects
+    special_effect: str|None = None  # Optional field for special effects
 
 class ConnectionManager:
     def __init__(self):

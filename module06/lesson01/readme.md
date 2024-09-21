@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS genders (
     createAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
+
+
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(30),
@@ -36,8 +38,42 @@ CREATE TABLE IF NOT EXISTS contacts (
 );
 ```
 
+```sql
+CREATE TABLE IF NOT EXISTS genders (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30),
+    createAt TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
 
+-- Create users table
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30),
+    email VARCHAR(30),
+    password VARCHAR(30),
+    age SMALLINT, -- PostgreSQL does not have TINYINT, use SMALLINT instead
+    gender_id INTEGER,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    FOREIGN KEY (gender_id) REFERENCES genders (id)
+          ON DELETE SET NULL
+          ON UPDATE CASCADE
+);
 
+-- Create contacts table
+CREATE TABLE IF NOT EXISTS contacts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30),
+    email VARCHAR(30),
+    phone VARCHAR(30),
+    favorite BOOLEAN,
+    user_id INTEGER,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+          ON DELETE CASCADE
+          ON UPDATE CASCADE
+);
+
+```
 # Додаємо дані до бази даних
 
 ```sql

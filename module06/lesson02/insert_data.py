@@ -5,7 +5,7 @@ from faker import Faker
 from random import randint
 from psycopg2 import DatabaseError
 
-from lesson02.connection import create_connection
+from connection import create_connection
 
 fake = Faker()
 COUNT = 50_000
@@ -25,7 +25,7 @@ def insert_data(conn, sql_expression):
 
 
 if __name__ == '__main__':
-    sql_expression = "INSERT INTO users(name,email,password, age) VALUES(%s, %s, %s, %s)"
+    sql_expression = "INSERT INTO users_new(name,email,password, age) VALUES(%s, %s, %s, %s)"
     try:
         with create_connection() as conn:
             if conn is not None:

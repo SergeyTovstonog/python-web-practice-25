@@ -2,7 +2,7 @@ import logging
 
 from psycopg2 import DatabaseError
 
-from lesson02.connection import create_connection
+from connection import create_connection
 
 
 def create_table(conn, sql_expression):
@@ -18,7 +18,7 @@ def create_table(conn, sql_expression):
 
 
 if __name__ == '__main__':
-    sql_expression = """CREATE TABLE IF NOT EXISTS users (
+    sql_expression = """CREATE TABLE IF NOT EXISTS users_new (
      id SERIAL PRIMARY KEY,
      name VARCHAR(120),
      email VARCHAR(120),

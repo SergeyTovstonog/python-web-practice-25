@@ -9,7 +9,7 @@ from psycopg2 import OperationalError, DatabaseError
 def create_connection():
     """ create a database connection to a Postgres database """
     try:
-        conn = psycopg2.connect(host='localhost', database='test', user='postgres', password='567234')
+        conn = psycopg2.connect(host='localhost', database='mydatabase', user='example', password='example')
         yield conn
         conn.close()
     except OperationalError as err:
