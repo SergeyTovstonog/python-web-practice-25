@@ -1,23 +1,15 @@
 # app.py
 
 import logging
-from sqlalchemy import create_engine, select, func, and_, or_
+from sqlalchemy import create_engine, select, func, and_, or_, update
 from sqlalchemy.orm import sessionmaker, joinedload, selectinload, subqueryload
 from models import Base, User, Post
 from sqlalchemy.exc import MultipleResultsFound, NoResultFound
+from db_config import engine, Session
 
 # Configure logging to display SQL statements
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.ERROR)  # Set to DEBUG for more details
-
-# Define the SQLite database
-DATABASE_URL = "sqlite:///example.db"
-
-# Create the SQLAlchemy engine with echo=True to log SQL statements
-engine = create_engine(DATABASE_URL, echo=True)  # echo=True enables SQL logging
-
-# Create a session factory using the new SQLAlchemy 2.0 syntax
-Session = sessionmaker(bind=engine, future=True) #
 
 def create_tables():
     """
@@ -202,12 +194,15 @@ def update_user(session, user_name, new_age):
         user = session.execute(
             select(User).where(User.name == user_name)
         ).scalar_one()
+        # session.execute(update(User).where(User.name == user_name))
         print(f"Before Update: {user.name}'s Age: {user.age}")
         user.age = new_age
         session.commit()
         print(f"After Update: {user.name}'s Age: {user.age}")
     except NoResultFound:
         print(f"{user_name} not found for update.")
+    except MultipleResultsFound:
+        print("Multiple users found with the same name.")
 
 def update_post(session, post_title, new_content):
     """
@@ -292,13 +287,13 @@ def main():
 
     with Session() as session:
         # READ Operations with Lazy Loading
-        # read_users_with_lazy_loading(session)
+        read_users_with_lazy_loading(session)
 
         # READ Operations with Eager Loading
         read_users_with_eager_loading(session)
     #
     #     # Aggregation Functions
-    #     perform_aggregation(session)
+        perform_aggregation(session)
     #
     #     # Logical Operators
     #     perform_logical_queries(session)

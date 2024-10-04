@@ -13,6 +13,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String, nullable=False)
     email: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     age: Mapped[int]
+    address: Mapped[str]
 
     posts = relationship("Post", back_populates="author")  # One-to-many relationship
 
@@ -23,5 +24,5 @@ class Post(Base):
     title: Mapped[str] = mapped_column(String, nullable=False)
     content: Mapped[str] = mapped_column(String)
     author_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
-
+    media_url: Mapped[str]
     author = relationship("User", back_populates="posts")  # Many-to-one relationship
