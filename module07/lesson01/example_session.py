@@ -42,7 +42,9 @@ if __name__ == '__main__':
     '''
 
     new_person = Person(fullname="Michail")
+    new_person_jane = Person(fullname="Jane Doe")
     session.add(new_person)
+    session.add(new_person_jane)
     '''Зверніть увагу, щоб зміни набули чинності, були записані до бази, обов'язково потрібно виконати commit.'''
 
     # session.commit()
@@ -53,11 +55,11 @@ if __name__ == '__main__':
 
     '''Щоб отримати дані з бази, можна скористатися методом query:'''
     print('Знайти користувача')
-    person = session.query(Person).one()
+    person = session.query(Person).filter(Person.fullname == 'Jane Doe').one()
     print(person.id, person.fullname)
     print('Знайти адреси з користувачами')
-    # addresses = session.query(Address).join(Address.person).all()
-    addresses = session.query(Address).all()
+    addresses = session.query(Address).join(Address.person).all()
+    # addresses = session.query(Address).all()
     for address in addresses:
         print(
             f"id: {address.id}, code: {address.post_code}, street: {address.street_name}, owner: {address.person.fullname}")

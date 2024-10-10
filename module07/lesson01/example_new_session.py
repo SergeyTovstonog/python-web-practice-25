@@ -14,7 +14,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
     id: Mapped[int] = mapped_column(primary_key=True)
-    fullname: Mapped[str] = mapped_column(String)
+    fullname: Mapped[str]
 
 
 class Address(Base):

@@ -1,0 +1,20 @@
+{
+  "title": "Alice's First Post",
+  "content": "Hello World!",
+  "author_id": "507f191e810c19729de860ea"  // Reference to User ID
+},
+
+{
+  "name": "Alice",
+  "age": 30,
+  "posts": [
+    {
+      "title": "Alice's First Post",
+      "content": "Hello World!"
+    },
+    {
+      "title": "Alice's Second Post",
+      "content": "Learning MongoDB."
+    }
+  ]
+}
